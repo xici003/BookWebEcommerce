@@ -1,0 +1,89 @@
+﻿@using BookWebEcommerce.Data.ViewModel;
+@model ShoppingCartVM
+
+@{
+    ViewData["Title"] = "Shopping cart summary";
+    Layout = "~/Views/Shared/Layout/MyLayout.cshtml";
+}
+
+<!-- Cart Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-lg-8 table-responsive mb-5">
+            <table class="table table-borderless table-hover text-center mb-0">
+                <thead style="background: #656565;color: white">
+                    <tr>
+                        <th>Products</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    @foreach (var item in Model.shoppingCart.ShoppingCartItems)
+                    {
+                        <tr>
+                            <td class="align-middle"><img src="@item.Book.ImageURL" alt="" style="width: 50px;"> @item.Book.Name</td>
+                            <td class="align-middle">@item.Book.Price..ToString("c")</td>
+                            <td class="align-middle">
+                                <a class="text-danger" asp-controller="Orders" asp-action="RemoveItemFromShoppingCart"
+                                   asp-route-id="@item.Book.Id">
+                                    <i class="bi bi-cart-dash"></i>
+                                </a>
+                                |
+                                <a class="text-success" asp-controller="Orders" asp-action="AddItemToShoppingCart"
+                                   asp-route-id="@item.Book.Id">
+                                    <i class="bi bi-cart-plus"></i>
+                                </a>
+                            </td>
+                            <td class="align-middle">@((item.Amount * item.Book.Price).ToString("c"))</td>
+                        
+                        </tr>
+                    }
+                   
+                </tbody>
+            </table>
+            <div class="text-right">
+                <div class="btn-group">
+                    <a class="btn btn-outline-primary" asp-action="CompleteOrder">
+                        Complete order
+                    </a>
+                    <a class="btn btn-outline-success" asp-controller="Movies" asp-action="Index">
+                        Add more items
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <form class="mb-30" action="">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Coupon Code">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary">Apply Coupon</button>
+                    </div>
+                </div>
+            </form>
+            <h5 class=" position-relative text-uppercase mb-3" style="margin: 25px 0 25px 0;"><span class="pr-3">Cart Summary</span></h5>
+            <div class="bg-light p-30 mb-5" style="padding: 30px">
+                <div class="border-bottom pb-2">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h6>Subtotal</h6>
+                        <h6>@Model.ShoppingCartTotal.ToString("c")</h6>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-medium">Shipping</h6>
+                        <h6 class="font-weight-medium">$0</h6>
+                    </div>
+                </div>
+                <div class="pt-2">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h5>Total</h5>
+                        <h5>@Model.ShoppingCartTotal.ToString("c")</h5>
+                    </div>
+                    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Cart End -->

@@ -1,7 +1,8 @@
-﻿using BookEcommerce.Data.Enum;
-using BookEcommerce.Models;
+﻿using BookWebEcommerce.Data;
+using BookWebEcommerce.Data.Enum;
+using BookWebEcommerce.Models;
 
-namespace BookEcommerce.Data
+namespace BookWebEcommerce.Data
 {
     public class AppDBInitializer
     {

@@ -1,8 +1,8 @@
-﻿using BookEcommerce.Data.Enum;
+﻿using BookWebEcommerce.Data.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BookEcommerce.Models
+namespace BookWebEcommerce.Models
 {
     public class Book
     {

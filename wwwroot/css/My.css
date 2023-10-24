@@ -216,7 +216,7 @@ h6,
 
 .section-title::before {
     position: absolute;
-    content: "";
+   /* content: "";*/
     width: 60px;
     height: 10px;
     left: 50%;
@@ -228,10 +228,20 @@ h6,
 .section-title::after {
     position: absolute;
     content: "";
-    width: 180px;
+    width: 280px;
     height: 2px;
-    left: 50%;
-    bottom: 4px;
+    left: 55%;
+    bottom: 10px;
+    margin-left: -90px;
+    background: var(--primary);
+}
+.cart-summary::before {
+    position: absolute;
+    content: "";
+    width: 280px;
+    height: 2px;
+    left: 55%;
+    bottom: 10px;
     margin-left: -90px;
     background: var(--primary);
 }

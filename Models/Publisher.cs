@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookEcommerce.Models
+namespace BookWebEcommerce.Models
 {
     public class Publisher
     {

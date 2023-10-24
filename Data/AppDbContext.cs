@@ -1,9 +1,9 @@
-﻿using BookEcommerce.Models;
+﻿using BookWebEcommerce.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography.X509Certificates;
 
-namespace BookEcommerce.Data
+namespace BookWebEcommerce.Data
 {
     public class AppDbContext : DbContext
     {
@@ -15,6 +15,12 @@ namespace BookEcommerce.Data
         public DbSet<Publisher> Publishers { get; set; }
 
         public DbSet<Translator> Translators { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<ShoppingCartItem>  ShoppingCartItems { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,6 +35,9 @@ namespace BookEcommerce.Data
             modelBuilder.Entity<Author>().ToTable(nameof(Author));
             modelBuilder.Entity<Publisher>().ToTable(nameof(Publisher));
             modelBuilder.Entity<Translator>().ToTable(nameof(Translator));
+            modelBuilder.Entity<Order>().ToTable(nameof(Order));
+            modelBuilder.Entity<OrderItem>().ToTable(nameof(OrderItem));
+            modelBuilder.Entity<ShoppingCartItem>().ToTable(nameof(ShoppingCartItem));
 
         }
     }

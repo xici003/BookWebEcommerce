@@ -1,4 +1,4 @@
-﻿namespace BookEcommerce.Data.Enum
+﻿namespace BookWebEcommerce.Data.Enum
 {
     public enum BookCategory
     {

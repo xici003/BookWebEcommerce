@@ -21,17 +21,17 @@ namespace BookWebEcommerce.Models
 
         public BookCategory Category { get; set; }
 
-        //Relationship
-        public int AuthorId { get; set; }
-        [ForeignKey("AuthorId")]
-        public Author Author { get; set; }
+		//Relationship
+		public int AuthorId { get; set; }
+		[ForeignKey("AuthorId")]
+		public virtual Author? Author { get; set; }
 
-        public int PublisherId { get; set; }
-        [ForeignKey("PublisherId")]
-        public Publisher Publisher { get; set; }
+		public int PublisherId { get; set; }
+		[ForeignKey("PublisherId")]
+		public virtual Publisher? Publisher { get; set; }
 
-        public int TranslatorId { get; set; }
-        [ForeignKey("TranslatorId")]
-        public Translator Translator { get; set; }
-    }
+		public int TranslatorId { get; set; }
+		[ForeignKey("TranslatorId")]
+		public virtual Translator? Translator { get; set; }
+	}
 }

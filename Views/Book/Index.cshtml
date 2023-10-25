@@ -1,0 +1,93 @@
+﻿@using BookWebEcommerce.Models;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Web.Common;
+@model IPagedList<Book>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@{
+	ViewData["Title"] = "List of Movies";
+	Layout = "~/Views/Shared/Layout/MyLayout.cshtml";
+}
+
+<div class="row">
+	<nav class="navbar navbar-default product-filter">
+		<div class="container d-flex justify-content-between align-items-center">
+		<div class="sort">
+			<span>Sắp xếp</span>
+			<select class="selectProductSort" id="lbsort" onchange="window.location.href = this.options[this.selectedIndex].value">
+				<option selected="selected" value="?sort=index&amp;order=asc">Mặc định</option>
+				<option value="?sort=price&amp;order=asc">Gi&#225; tăng dần</option>
+				<option value="?sort=price&amp;order=desc">Gi&#225; giảm dần</option>
+				<option value="?sort=name&amp;order=asc">T&#234;n sản phẩm: A to Z</option>
+				<option value="?sort=name&amp;order=desc">T&#234;n sản phẩm: Z to A</option>
+			</select>
+		</div>
+	</div>
+	</nav>
+	
+	@if(Model != null && Model.Any())
+	{
+		var i = 1;
+		<div class="row justify-content-center align-items-center">
+			@foreach (var item in Model)
+			{
+				<div class="col-md-2 col-xs-6 border-primary mb-3">
+				<div class="card mb-3 mx-auto" style="max-width:340px">
+						<div class="row g-0">
+							<div class="col-md-12">
+								<div class="card-header text-white " style="background: #E88F2A">
+									<p class="card-text">
+										<h5 class="card-title">
+											@item.Name
+											@* @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+									{
+									<a class="text-white float-end" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+									} *@
+											<a class="text-white float-end" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+											<a class="text-white float-end" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+										</h5>
+									</p>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<img src="@item.ImageURL" width="100%" alt="@item.Name">
+							</div>
+							<p class="card-text" , style="text-align: center ; font-weight:bold;font-size: 25px">@item.Author.FullName</p>
+							<div class="col-md-12">
+								<div class="card-footer">
+									<p class="card-text">
+										<a class="btn btn-outline-primary float-end" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i></a>
+										<a class="btn btn-success text-white" asp-controller="Order" asp-action="AddToShoppingCart" asp-route-id="@item.Id"><i class="bi bi-card-plus"></i>Add to cart @item.Price.ToString("c")</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		}
+		</div>
+		i++;
+	}
+	@{
+		var page = Model.PageNumber;
+		var pageSize = ViewBag.pageSize;
+	}
+</div>	
+<a class="btn btn-success text-white" asp-action="Create" style="width: 100px,float: right,margin-right: 100px"><i class="bi bi-plus"></i> Add New Book</a>
+<div class="pagination justify-content-center mb-3">
+	@Html.PagedListPager(Model, page => Url.Action("Index", "Book", new { page = page, pageSize = pageSize }),new PagedListRenderOptions(){
+	LiElementClasses = new string[]{"page-item"},
+	PageClasses = new string[] {"page-link"}
+	})
+</div>
+
+@* @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+	<a class="btn btn-success text-white" asp-action="Create" style="width: 100px,float: right,margin-right: 100px"><i class="bi bi-plus"></i> Add New </a>
+} *@

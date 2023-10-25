@@ -28,7 +28,7 @@ namespace BookWebEcommerce.Data.Cart
 
         public void AddItemToCart(Book book)
         {
-            var shoppingCartItem = ShoppingCartItems.FirstOrDefault(n => n.Book.Id == book.Id && n.ShoppingCartId == ShoppingCartId);
+            var shoppingCartItem =_context.ShoppingCartItems.FirstOrDefault(n => n.Book.Id == book.Id && n.ShoppingCartId == ShoppingCartId);
             if(shoppingCartItem == null)
             {
                 shoppingCartItem = new ShoppingCartItem()

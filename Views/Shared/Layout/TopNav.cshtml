@@ -42,10 +42,14 @@
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
         </form>
         <div class="navbar-nav ms-auto mx-lg-auto py-0">
-            <a class="nav-item nav-link active">Movies</a>
+            <a class="nav-item nav-link active" href="@Url.Action("Index","Book")">Book</a>
             <a class="nav-item nav-link" >Cinemas</a>
             <a class="nav-item nav-link">Actors</a>
             <a class="nav-item nav-link">Producers</a>
         </div>
+
+        <ul class="navbar-nav">
+            @await Component.InvokeAsync("ShoppingCartSummary")
+        </ul>
     </div>
 </nav>

@@ -1,6 +1,7 @@
 ﻿using BookWebEcommerce.Data;
 using BookWebEcommerce.Data.Enum;
 using BookWebEcommerce.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookWebEcommerce.Data
 {
@@ -159,5 +160,7 @@ namespace BookWebEcommerce.Data
 
             }
         }
-    }
+	
+
+	}
 }

@@ -1,4 +1,6 @@
 ﻿using BookWebEcommerce.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography.X509Certificates;
@@ -7,9 +9,12 @@ namespace BookWebEcommerce.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+		{
+            
+		}
 
-        public DbSet<Book> Books { get; set; }
+		public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
 
         public DbSet<Publisher> Publishers { get; set; }
@@ -31,14 +36,15 @@ namespace BookWebEcommerce.Data
             modelBuilder.Entity<Book>().HasOne(b => b.Translator).WithMany(a => a.Books)
                          .HasForeignKey(b => b.TranslatorId);
 
-            modelBuilder.Entity<Book>().ToTable(nameof(Book));
+
+			modelBuilder.Entity<Book>().ToTable(nameof(Book));
             modelBuilder.Entity<Author>().ToTable(nameof(Author));
             modelBuilder.Entity<Publisher>().ToTable(nameof(Publisher));
             modelBuilder.Entity<Translator>().ToTable(nameof(Translator));
             modelBuilder.Entity<Order>().ToTable(nameof(Order));
             modelBuilder.Entity<OrderItem>().ToTable(nameof(OrderItem));
             modelBuilder.Entity<ShoppingCartItem>().ToTable(nameof(ShoppingCartItem));
-
-        }
-    }
+			base.OnModelCreating(modelBuilder);
+		}
+	}
 }

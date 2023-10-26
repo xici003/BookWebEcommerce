@@ -62,6 +62,12 @@ namespace BookWebEcommerce.Data.Cart
 
             _context.SaveChanges();
         }
+        public async Task ClearShoppingCart()
+        {
+			var items = await _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).ToListAsync();
+			_context.ShoppingCartItems.RemoveRange(items);
+			await _context.SaveChangesAsync();
+		}
         public static ShoppingCart GetShoppingCart(IServiceProvider services)
         {
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
@@ -72,5 +78,6 @@ namespace BookWebEcommerce.Data.Cart
 
             return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
+
     }
 }

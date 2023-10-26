@@ -45,7 +45,7 @@
             </table>
             <div class="text-right">
                 <div class="btn-group">
-                   
+                    
                     <a class="btn btn-outline-success" asp-controller="Book" asp-action="Index">
                         Add more items
                     </a>
@@ -78,7 +78,7 @@
                         <h5>Total</h5>
                         <h5>@Model.ShoppingCartTotal.ToString("c")</h5>
                     </div>
-                    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                    <a class="btn btn-block btn-primary font-weight-bold my-3 py-3" asp-action="CompleteOrder">Proceed To Checkout</a>
                 </div>
             </div>
         </div>

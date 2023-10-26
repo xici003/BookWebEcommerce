@@ -1,5 +1,6 @@
 ﻿using BookWebEcommerce.Data;
 using BookWebEcommerce.Data.Cart;
+using BookWebEcommerce.Data.Services;
 using BookWebEcommerce.Data.ViewModel;
 using BookWebEcommerce.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,20 @@ namespace BookWebEcommerce.Controllers
     {
         private readonly ShoppingCart _shoppingCart;
         private readonly AppDbContext _context;
+        private readonly IOrdersServices _ordersServices;
 
-        public OrderController(ShoppingCart shoppingCart, AppDbContext context)
+        public OrderController(ShoppingCart shoppingCart, AppDbContext context, IOrdersServices ordersServices)
         {
             _shoppingCart = shoppingCart;
             _context = context;
+            _ordersServices = ordersServices;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            string userId = "";
+            var items =await _ordersServices.GetAllOrdersAsync(userId);
+            return View(items);
         }
 
         public IActionResult ShoppingCart()
@@ -52,5 +62,16 @@ namespace BookWebEcommerce.Controllers
             }
             return RedirectToAction("ShoppingCart");
         }
-    }
+        public async Task<IActionResult> CompleteOrder()
+        {
+            var items = _shoppingCart.GetShoppingCartItems();
+            string userName = "";
+            string emailAddress = "";
+            await _ordersServices.StoreOrderAsync(items, userName, emailAddress);
+            await _shoppingCart.ClearShoppingCart();
+            return View("CompleteOrder");
+        }
+
+
+	}
 }

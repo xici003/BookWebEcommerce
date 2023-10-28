@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace BookWebEcommerce.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
 		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
 		{
@@ -35,7 +35,7 @@ namespace BookWebEcommerce.Data
                          .HasForeignKey(b => b.PublisherId);
             modelBuilder.Entity<Book>().HasOne(b => b.Translator).WithMany(a => a.Books)
                          .HasForeignKey(b => b.TranslatorId);
-
+			base.OnModelCreating(modelBuilder);
 
 			modelBuilder.Entity<Book>().ToTable(nameof(Book));
             modelBuilder.Entity<Author>().ToTable(nameof(Author));
@@ -44,7 +44,7 @@ namespace BookWebEcommerce.Data
             modelBuilder.Entity<Order>().ToTable(nameof(Order));
             modelBuilder.Entity<OrderItem>().ToTable(nameof(OrderItem));
             modelBuilder.Entity<ShoppingCartItem>().ToTable(nameof(ShoppingCartItem));
-			base.OnModelCreating(modelBuilder);
+			
 		}
 	}
 }

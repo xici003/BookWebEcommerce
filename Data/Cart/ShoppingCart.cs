@@ -17,7 +17,8 @@ namespace BookWebEcommerce.Data.Cart
 
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
-            return ShoppingCartItems ?? (ShoppingCartItems = _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).Include(b => b.Book).ToList());
+            return ShoppingCartItems ?? (ShoppingCartItems = _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId)
+                .Include(b => b.Book).ToList());
         }
 
         public double GetShoppingCartTotal()

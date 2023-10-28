@@ -1,0 +1,55 @@
+﻿@using BookWebEcommerce.ViewModel;
+@model LoginVM
+
+@{
+    ViewData["Title"] = "Log in to your account";
+    Layout = "~/Views/Shared/Layout/MyLayout.cshtml";
+}
+
+<style>
+    .text{
+        color: var(--primary);
+        padding: 15px 0 15px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <p>
+            <h4>Log in to your account</h4>
+        </p>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Sorry!</b> - @TempData["Error"] </span>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-8 offset-2" style="border-radius: 5px;width: 500px;background: #2b2825;">
+                <form asp-action="Login" style=" padding: 0 15px;">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="EmailAddress" class="control-label text"></label>
+                        <input asp-for="EmailAddress" class="form-control text" style="border-radius: 3px" />
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label text"></label>
+                        <input asp-for="Password" class="form-control" style="border-radius: 3px" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group" style="padding: 20px 0 20px;">
+                        <input class="btn btn-outline-success float-right" style="margin-right: 5px" type="submit" value="Log in" />
+                        <a class="btn btn-outline-secondary" asp-controller="Book" asp-action="Index">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+     

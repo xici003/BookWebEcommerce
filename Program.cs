@@ -16,8 +16,15 @@ builder.Services.AddScoped<IOrdersServices,OrdersService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
-
+//Authentication and authorization
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddMemoryCache();
 builder.Services.AddSession();
+
+builder.Services.AddAuthentication(options =>
+{
+	options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+});
 
 
 // Add services to the container.
@@ -39,6 +46,9 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();
 
+//Authentication and authorization
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseAuthorization();
 
@@ -47,5 +57,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 AppDBInitializer.Seed(app);
+AppDBInitializer.SeedUsersAndRolesAsync(app).Wait();
 
 app.Run();

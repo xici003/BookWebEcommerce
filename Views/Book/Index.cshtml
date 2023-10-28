@@ -40,12 +40,13 @@
 									<p class="card-text">
 										<h5 class="card-title">
 											@item.Name
-											@* @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-									{
-									<a class="text-white float-end" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-									} *@
-											<a class="text-white float-end" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-											<a class="text-white float-end" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+											@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+											{
+												<a class="text-white float-end" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+												<a class="text-white float-end" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+											}
+
+											
 										</h5>
 									</p>
 								</div>
@@ -75,15 +76,15 @@
 		var pageSize = ViewBag.pageSize;
 	}
 </div>	
-<a class="btn btn-success text-white" asp-action="Create" style="width: 100px,float: right,margin-right: 100px"><i class="bi bi-plus"></i> Add New Book</a>
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+	<a class="btn btn-success text-white" asp-action="Create" style="width: 100px,float: right,margin-right: 100px"><i class="bi bi-plus"></i> Add New Book</a>
+}
+
 <div class="pagination justify-content-center mb-3">
 	@Html.PagedListPager(Model, page => Url.Action("Index", "Book", new { page = page, pageSize = pageSize }),new PagedListRenderOptions(){
 	LiElementClasses = new string[]{"page-item"},
 	PageClasses = new string[] {"page-link"}
 	})
 </div>
-
-@* @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-{
-	<a class="btn btn-success text-white" asp-action="Create" style="width: 100px,float: right,margin-right: 100px"><i class="bi bi-plus"></i> Add New </a>
-} *@

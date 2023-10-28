@@ -5,6 +5,7 @@ using BookWebEcommerce.Data.ViewModel;
 using BookWebEcommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BookWebEcommerce.Controllers
 {
@@ -23,8 +24,9 @@ namespace BookWebEcommerce.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string userId = "";
-            var items =await _ordersServices.GetAllOrdersAsync(userId);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userRole = User.FindFirstValue(ClaimTypes.Role);
+            var items =await _ordersServices.GetAllOrdersAsync(userId,userRole);
             return View(items);
         }
 
@@ -65,8 +67,8 @@ namespace BookWebEcommerce.Controllers
         public async Task<IActionResult> CompleteOrder()
         {
             var items = _shoppingCart.GetShoppingCartItems();
-            string userName = "";
-            string emailAddress = "";
+            string userName = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string emailAddress = User.FindFirstValue(ClaimTypes.Email);
             await _ordersServices.StoreOrderAsync(items, userName, emailAddress);
             await _shoppingCart.ClearShoppingCart();
             return View("CompleteOrder");

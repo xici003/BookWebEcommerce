@@ -11,10 +11,13 @@ namespace BookWebEcommerce.Data.Services
 		{
 			_context = context;
 		}
-		public async Task<List<Order>> GetAllOrdersAsync(string userId)
+		public async Task<List<Order>> GetAllOrdersAsync(string userId, string userRole)
 		{
-			var items =await _context.Orders.Include(n => n.OrderItems).ThenInclude(b => b.Book)
-				.Where(n => n.UserId == userId).ToListAsync();
+			var items =await _context.Orders.Include(n => n.OrderItems).ThenInclude(b => b.Book).Include(n => n.User).ToListAsync();
+			if(userRole != "Admin")
+			{
+				items = items.Where(n => n.UserId == userId).ToList();
+			}
 			return items;
 		}
 

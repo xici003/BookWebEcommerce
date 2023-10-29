@@ -1,0 +1,60 @@
+﻿@model BookWebEcommerce.Models.Author
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/Layout/MyLayout.cshtml";
+}
+
+
+<h1>Details</h1>
+
+<div>
+    <h4>Author</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Profile Picture
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Model.ProfilePictureURL" width="300" height="400" />
+        </dd>
+        <dt class="col-sm-2">
+            Full Name
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            Biography
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Bio)
+        </dd>
+        <dt class="col-sm-2">
+            Book
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                List<string> sach = ViewBag.book;
+                if (sach == null)
+                {
+                    <span>Chưa có sách ở cửa hàng</span>
+                }
+                else if (sach.Count > 0)
+                {
+                    for (int i = 0; i < sach.Count(); i++)
+                    {
+                        <span>@sach[i]</span>
+                    }
+                }
+
+            }
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+

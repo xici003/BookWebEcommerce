@@ -1,0 +1,45 @@
+﻿@* @model IEnumerable<BookWebEcommerce.Models.Author>
+ *@
+@model X.PagedList.IPagedList<BookWebEcommerce.Models.Author>
+@using X.PagedList.Mvc;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Layout/MyLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New Author</a>
+</p>
+
+
+<div id="dataList">
+    @Html.Partial("Paginate", Model)
+</div>
+
+<div id="contentPager" class="pagination justify-content-center mb-3">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }) ,new PagedListRenderOptions(){
+    LiElementClasses = new string[]{"page-item"},
+    PageClasses = new string[] {"page-link"}
+    })
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#contentPager a").on("click", function (e) {
+            e.preventDefault();
+            var url = $(this).attr("href");
+
+            $.get(url, function (data) {
+                $("#dataList").html(data);
+            });
+        });
+    });
+</script>
+
+

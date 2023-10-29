@@ -1,0 +1,65 @@
+﻿@model BookWebEcommerce.Models.Author
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/Layout/MyLayout.cshtml";
+}
+
+<h1>Create a new author</h1>
+
+<h4>Author</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Author" asp-action="Create" method="post" class="mt-3">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div style="margin-top:7px" class="form-group row">
+                <label asp-for="ProfilePictureURL" class="control-label"></label>
+                <div class="col-sm-5">
+                    <input asp-for="ProfilePictureURL" class="form-control" placeholder="Profile Picture URL" id="URLInput" oninput="showImage()" />
+                </div>
+                <div class="col-sm-5">
+                    <img src="" alt="image" id="image" />
+                </div>
+                <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+            </div>
+
+            <div style="margin-top:7px" class="form-group row">
+                <label asp-for="FullName" class="control-label"></label>
+                <div class="col-sm-5">
+                    <input asp-for="FullName" class="form-control" placeholder="Full Name" />
+                </div>
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div style="margin-top:7px" class="form-group row">
+                <label asp-for="Bio" class="control-label"></label>
+                <div class="col-sm-5">
+                    <input asp-for="Bio" class="form-control" placeholder="Biography" />
+                </div>
+                <span asp-validation-for="Bio" class="text-danger"></span>
+            </div>
+            <div style="margin-top:10px" class="form-group row">
+                <div class="col-sm-10">
+                    <input type="submit" value="Create" class="btn btn-primary" /> |
+                    <a asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showImage() {
+        var imageURL = document.getElementById("URLInput").value;
+        var imageElement = document.getElementById("image");
+        if (imageURL) {
+            imageElement.src = imageURL;
+        }
+        else {
+            imageElement.src = "";
+        }
+    }
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

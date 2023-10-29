@@ -17,6 +17,6 @@ namespace BookWebEcommerce.Models
         public string Bio { get; set; }
 
         //Relationship
-        public ICollection<Book> Books { get; set; }
+        public virtual ICollection<Book>? Books { get; set; }
     }
 }

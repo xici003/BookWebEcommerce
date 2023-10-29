@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Author>
+<div style="display: flex; justify-content: center;">
+    <span>Filter-Author</span>
+        <select class="nav form-select" id="authorSelect">
+        <option value="">All</option>
+            @foreach (var m in Model)
+            {
+                <option value="@m.Id">@m.FullName</option>
+            }
+        </select>
+</div>

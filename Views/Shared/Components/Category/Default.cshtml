@@ -1,0 +1,13 @@
+﻿@using BookWebEcommerce.Models;
+@model IEnumerable<BookWebEcommerce.Data.Enum.BookCategory>
+<ul class="nav">
+    <li class="nav-item" id="null">
+        <a class="nav-link book category-filter">All</a>
+    </li>
+    @foreach (BookWebEcommerce.Data.Enum.BookCategory m in Enum.GetValues(typeof(BookWebEcommerce.Data.Enum.BookCategory)))
+    {
+        <li class="nav-item " id="@((int)m)">
+            <a class="nav-link book category-filter">@m</a>
+        </li>
+    }
+</ul>

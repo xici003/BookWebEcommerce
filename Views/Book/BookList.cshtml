@@ -1,0 +1,64 @@
+﻿@using BookWebEcommerce.Models;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Web.Common;
+@using Microsoft.AspNetCore.Http
+@model IPagedList<Book>
+	<div class="row">
+		@if (Model != null && Model.Any())
+		{
+			var i = 1;
+			<div class="row justify-content-center align-items-center">
+				@foreach (var item in Model)
+				{
+					<div class="col-md-2 col-xs-6 border-primary mb-3">
+						<div class="card mb-3 mx-auto" style="max-width:340px">
+							<div class="row g-0">
+								<div class="col-md-12">
+									<div class="card-header text-white " style="background: #E88F2A">
+										<p class="card-text">
+											<h5 class="card-title">
+												@item.Name
+												@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+												{
+													<a class="text-white float-end" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+													<a class="text-white float-end" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+												}
+
+											</h5>
+										</p>
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<img src="@item.ImageURL" width="100%" alt="@item.Name">
+								</div>
+								<p class="card-text" , style="text-align: center ; font-weight:bold;font-size: 25px">@item.Author.FullName</p>
+								<div class="col-md-12">
+									<div class="card-footer">
+										<p class="card-text">
+											<a class="btn btn-outline-primary float-end" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i></a>
+											<a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id="@item.Id"><i class="bi bi-card-plus"></i>Add to cart @item.Price.ToString("c")</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+
+			i++;
+		}
+	</div>
+@{
+	var midValue = ViewBag.MidValue;
+	var page = Model.PageNumber; // hoặc bạn có thể sử dụng biến page từ ViewBag nếu đã thiết lập trước đó
+	var pageSize = ViewBag.pageSize;
+}
+<div class="pagination justify-content-center mb-3">
+	@Html.PagedListPager(Model, page => Url.Action("BookFilter", new { page, pageSize =pageSize , mid = midValue }),new PagedListRenderOptions(){
+	LiElementClasses = new string[]{"page-item"},
+	PageClasses = new string[] {"page-link"}
+	})
+</div>

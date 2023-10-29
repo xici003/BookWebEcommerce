@@ -21,7 +21,7 @@
                     <input asp-for="ProfilePictureURL" class="form-control" placeholder="Profile Picture URL" id="URLInput" oninput="showImage()" />
                 </div>
                 <div class="col-sm-5">
-                    <img src="" alt="image" id="image" />
+                    <img src="@Model.ProfilePictureURL" alt="image" id="image" width="300" height="400" />
                 </div>
                 <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
             </div>

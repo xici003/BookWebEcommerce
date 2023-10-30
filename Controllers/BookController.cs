@@ -87,6 +87,7 @@ namespace BookWebEcommerce.Controllers
             {
                 return NotFound();
             }
+
             ViewBag.AuthorId = new SelectList(ApDb.Authors, "Id", "FullName", books.AuthorId);
             ViewBag.PublisherId = new SelectList(ApDb.Publishers, "Id", "Name", books.PublisherId);
             ViewBag.TranslatorId = new SelectList(ApDb.Translators, "Id", "Name", books.TranslatorId);

@@ -20,11 +20,14 @@ namespace BookWebEcommerce.Controllers
             var author = (from l in db.Authors select l).OrderBy(X => X.Id);
             int pageNum = (page ?? 1);
             var paging = author.ToPagedList(pageNum, pageSize);
-            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-            {
-                return PartialView("Paginate", paging);
-            }
             return View(paging);
+        }
+        public IActionResult Paginate(int? page)
+        {
+            var author = (from l in db.Authors select l).OrderBy(X => X.Id);
+            int pageNum = (page ?? 1);
+            var paging = author.ToPagedList(pageNum, pageSize);
+            return PartialView("Paginate", paging);
         }
         public IActionResult Create()
         {

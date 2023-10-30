@@ -10,7 +10,7 @@
     Layout = "~/Views/Shared/Layout/MyLayout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Authors</h1>
 
 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {
@@ -19,31 +19,31 @@
     </p>
 }
 
+<body>
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
+                <h2 class="text-primary font-secondary">Author</h2>
+                <h1 class="display-4 text-uppercase">Our Author</h1>
+            </div>
+        <div id="content">
+            <partial name="Paginate" model="Model" />
+        </div>
+        </div>
+    </div>
 
+</body>
 
-<div id="dataList">
-    @Html.Partial("Paginate", Model)
-</div>
-
-<div id="contentPager" class="pagination justify-content-center mb-3">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }) ,new PagedListRenderOptions(){
-    LiElementClasses = new string[]{"page-item"},
-    PageClasses = new string[] {"page-link"}
-    })
-</div>
-
-
-<script>
-    $(document).ready(function () {
-        $("#contentPager a").on("click", function (e) {
-            e.preventDefault();
-            var url = $(this).attr("href");
-
-            $.get(url, function (data) {
-                $("#dataList").html(data);
+@section Scripts{
+ <script>
+        $(document).ready(function () {
+            $("body").on("click", ".pagination a", function (e) {
+                e.preventDefault();
+                var url = $(this).attr("href");
+                $("#content").load(url);
             });
         });
-    });
-</script>
+    </script>
+ }
 
 

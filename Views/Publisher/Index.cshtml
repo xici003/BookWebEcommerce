@@ -4,17 +4,22 @@
 @using X.PagedList;
 @using X.PagedList.Web.Common;
 @{
-	Layout = "~/Views/Shared/Layout/MyLayout.cshtml";
+    Layout = "~/Views/Shared/Layout/MyLayout.cshtml";
 }
 <link href="~/css/cssp/responsive.css" rel="stylesheet" />
-<link href="~/css/cssp/ui.css" rel="stylesheet" />  
+<link href="~/css/cssp/responsive1.css" rel="stylesheet" />
+<link href="~/css/cssp/ui.css" rel="stylesheet" />
+
+
+
+
 
 <div style="padding-bottom:30px">
     <!-- Page Header Start -->
     <div class="container-fluid bg-dark bg-img p-5 mb-5" style="background-color: #2B2825 !important; padding-bottom:50px">
         <div class="row">
             <div class="col-12 text-center">
-                <h1 class="display-4 text-uppercase text-white" >Publishing House</h1>
+                <h1 class="display-4 text-uppercase text-white">Publishing House</h1>
                 <a href="">Home</a>
                 <i class="far fa-square text-primary px-2"></i>
                 <a href="">Publisher</a>
@@ -22,8 +27,6 @@
         </div>
     </div>
     <!-- Page Header End -->
-
-
     <!-- About Start -->
     <div class="container-fluid pt-5">
         <div class="container" style="padding-bottom:100px">
@@ -40,7 +43,7 @@
                 <div class="col-lg-6 pb-5">
                     <h4 class="mb-4">My Sublishing House</h4>
                     <p class="mb-5">"We take pride in having an extensive list of reliable suppliers who have been verified and quality assured to provide you with the best books. We always prioritize ensuring that all the products in our store come from reputable and trustworthy suppliers, so you can have peace of mind about the quality of every book you purchase from us."</p>
-                     <div class="row g-5">
+                    <div class="row g-5">
                         <div class="col-sm-6">
                             <div class="d-flex align-items-center justify-content-center bg-primary border-inner mb-4" style="width: 90px; height: 90px;">
                                 <i class="fa fa-heartbeat fa-2x text-white"></i>
@@ -55,28 +58,25 @@
                             <h4 class="text-uppercase">Be licenced</h4>
                             <p class="mb-0"></p>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- About End -->
-
-
     <!-- =============== SECTION =============== -->
+    @* <div class="col-md-9">
+    <!-- =============== item begin=============== -->
+    @await Component.InvokeAsync("item",@item.Id);
+    <!-- =============== item end=============== -->
 
-					    @* <div class="col-md-9">
-						    <!-- =============== item begin=============== -->
-						    @await Component.InvokeAsync("item",@item.Id);
-						    <!-- =============== item end=============== -->
+    </div> <!-- col.// --> *@
 
-					    </div> <!-- col.// --> *@
-                   
 
     <!-- =============== SECTION END =============== -->
     <div class="section-nhalam">
-      
-@*====================== SEARCHING========================= *@
+
+        @*====================== SEARCHING========================= *@
         @using (Html.BeginForm("Index", "Publisher", FormMethod.Get))
         {
             <p>
@@ -84,64 +84,64 @@
                 <input type="submit" value="Search" />
             </p>
         }
-@* 
+        @*
         ========================================= *@
-    @foreach (var item in Model)
-    {
-	    <section class="padding-bottom" style="padding:0 50px 20px 50px">
-		    <header class="section-heading heading-line">
-			    <h4 class="title-section text-uppercase">@item.Name</h4>
-		    </header>
+        @foreach (var item in Model)
+        {
+            <section class="padding-bottom" style="padding:0 50px 20px 50px">
+                <header class="section-heading heading-line">
+                    <h4 class="title-section text-uppercase">@item.Name</h4>
+                </header>
 
-		    <div class="card card-home-category">
-			    <div class="row no-gutters">
-				    <div class="col-md-3">
+                <div class="card card-home-category">
+                    <div class="row no-gutters">
+                        <div class="col-md-3">
 
-					    <div class="home-category-banner bg-light-orange" style="text-align:center">
-						    <h5 class="title">Mall | Xử lý bởi BookZone</h5>
-						    <img src="@item.Logo" class="logo-nhacc" style="width:150px; height:115px; margin:10px 0 20px 0"></img>
-						    <p>@item.Description</p>
+                            <div class="home-category-banner bg-light-orange" style="text-align:center">
+                                <h5 class="title">Mall | Xử lý bởi BookZone</h5>
+                                <img src="@item.Logo" class="img-bg" style="width:150px; height:115px;position:unset"></img>
+                                <p>@item.Description</p>
                                 <a asp-controller="Publisher" asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary rounded-pill">Details</a>
                                 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                                 {
                                     <a asp-controller="Publisher" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary rounded-pill">Delete</a>
                                     <a asp-controller="Publisher" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary rounded-pill">Edit</a>
                                 }
-                                
-						    <img src="images/items/2.jpg" class="img-bg">
-					    </div>
 
-				    </div> <!-- col.// -->
-				    <div class="col-md-9">
+                            </div>
+
+                        </div> <!-- col.// -->
+                        <div class="col-md-9">
                             <!-- =============== item begin=============== -->
                             @await Component.InvokeAsync("item",@item.Id);
                             <!-- =============== item end=============== -->
-				    </div> <!-- col.// -->
-			    </div> <!-- row.// -->
-		    </div> <!-- card.// -->
-	    </section>
-    }
-@* ===========================
-                 PAGE
+                        </div> <!-- col.// -->
+                    </div> <!-- row.// -->
+                </div> <!-- card.// -->
+            </section>
+        }
+        @* ===========================
+        PAGE
 
-   =========================== 
- *@
+        ===========================
+        *@
         Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
         @Html.PagedListPager( Model, page => Url.Action("Index", new { page,  currentFilter=ViewBag.CurrentFilter }) )
-    <!-- =============== SECTION 1 END =============== -->
+        <!-- =============== SECTION 1 END =============== -->
 
-    <a asp-action="Create" class="btn btn-primary border-inner py-3 px-5 me-5">Create New Publisher</a></div>
-<script>
-    function showImage() {
-        var imageURL = document.getElementById("imageURLInput").value;
-        var imageElement = document.getElementById("image");
-        if (imageURL) {
-            imageElement.src = imageURL;
-        } else {
-            //neu khong co url , xoa hinh anh hoac hien thi mot hinh anh mac dinh
-            imageElement.src = "";// = URL cua hinh anh mac dinh
+        <a asp-action="Create" class="btn btn-primary border-inner py-3 px-5 me-5">Create New Publisher</a>
+    </div>
+    <script>
+        function showImage() {
+            var imageURL = document.getElementById("imageURLInput").value;
+            var imageElement = document.getElementById("image");
+            if (imageURL) {
+                imageElement.src = imageURL;
+            } else {
+                //neu khong co url , xoa hinh anh hoac hien thi mot hinh anh mac dinh
+                imageElement.src = "";// = URL cua hinh anh mac dinh
+            }
         }
-    }
-</script>
+    </script>
 

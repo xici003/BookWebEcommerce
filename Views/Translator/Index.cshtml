@@ -23,23 +23,32 @@
 							{
 								<a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
 								<a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+								<a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" asp-action="Create">
+									<i class="bi bi-plus-square-fill"></i>
+								</a>
+
 							}
 
-							<a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i></a>
+
+	
 						</div>
 					</div>
 				</div>
-				<div class="bg-dark border-inner text-center p-4" style="height: 200px;">
+				<div class="bg-dark border-inner text-center p-4" style="height: 200px; padding:10px ">
 					<h4 class="text-uppercase text-primary">@item.Name</h4>
 					<p class="text-white m-0">Age: @item.Age</p>
                     <p class="text-white m-0">Nationality: @item.Nationality</p>
-
+					<p class="text-white m-0">Genre: @item.Genre</p>
 				</div>
 				
 			</div>
 		</div>
 	}
 </div>
-<div class="product__pagination">
-    @Html.PagedListPager(Model,page=>Url.Action("Index",new{page=page}))
+
+<div class="pagination justify-content-center mb-3">
+	@Html.PagedListPager(Model, page => Url.Action("Index", "Translator", new { page = page}),new X.PagedList.Web.Common.PagedListRenderOptions(){
+	LiElementClasses = new string[]{"page-item"},
+	PageClasses = new string[] {"page-link"}
+	})
 </div>

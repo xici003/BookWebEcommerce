@@ -129,8 +129,11 @@
 
         @Html.PagedListPager( Model, page => Url.Action("Index", new { page,  currentFilter=ViewBag.CurrentFilter }) )
         <!-- =============== SECTION 1 END =============== -->
-
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
         <a asp-action="Create" class="btn btn-primary border-inner py-3 px-5 me-5">Create New Publisher</a>
+        }
+        
     </div>
     <script>
         function showImage() {

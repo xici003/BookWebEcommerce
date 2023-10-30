@@ -39,6 +39,7 @@
 							</div>
 							<div class="bg-dark border-inner text-center p-4" style="height: 200px;">
 								<h4 class="text-uppercase text-primary">@item.Name</h4>
+								<a asp-controller="Author" asp-action="Details" asp-route-id="@item.AuthorId">@item.Author.FullName</a>
 								<p class="text-white m-0">@item.Description</p>
 								
 							</div>

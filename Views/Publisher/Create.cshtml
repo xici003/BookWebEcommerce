@@ -1,0 +1,58 @@
+﻿
+@{
+	ViewData["Title"] = "Create";
+	Layout = "~/Views/Shared/Layout/MyLayout.cshtml";
+}
+@model Publisher
+<!-- Contact Start -->
+<h1 style="text-align:center; padding:40px; padding-bottom:0px">Create New Publisher</h1>
+<div class="container-fluid contact position-relative px-5" style="margin-top: 90px;padding-bottom:45px">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6" asp-validation-summary="All">
+                <form asp-controller="Publisher" asp-action="Create" method="post">
+                    <div class="row g-3">
+                        <div class="col-sm-12">
+                            <label asp-for="Logo" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-5">
+                                <input asp-for="Logo" id="imageURLInput" oninput="showImage()" />
+                            </div>
+                            <div class="col-sm-5">
+                                <img src="" alt="image" id="image" />
+                            </div> 
+                            <span asp-validation-for="Logo" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="col-sm-12">
+                            <label asp-for="Name" class="col-sm-2 col-form-label">PublisherName</label>
+                            <input asp-for="Name" type="text" class="form-control bg-light border-0 px-4" placeholder="Publisher Name" style="height: 55px;">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-12">
+                            <label asp-for="Description" class="col-sm-2 col-form-label">Description</label>
+                            <textarea asp-for="Description" class="form-control bg-light border-0 px-4 py-3" rows="4" placeholder="Description"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary border-inner w-100 py-3" type="submit" style="padding-bottom:30px" >Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+<script>
+    function showImage() {
+        var imageURL = document.getElementById("imageURLInput").value;
+        var imageElement = document.getElementById("image");
+        if (imageURL) {
+            imageElement.src = imageURL;
+        } else {
+            //neu khong co url , xoa hinh anh hoac hien thi mot hinh anh mac dinh
+            imageElement.src = "";// = URL cua hinh anh mac dinh
+        }
+    }
+</script>
+

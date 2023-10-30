@@ -80,5 +80,7 @@ namespace BookWebEcommerce.Data.Cart
             return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
 
+        /*public int GetAmount() => _context.shoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).Select(n => n.Amount).Sum();*/
+
     }
 }

@@ -9,37 +9,49 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/Layout/MyLayout.cshtml";
 }
-<div class="list-user" >
-    @foreach (var s in Model)
-    {
-        <div class="item-user" style="height:550px" >
-            <img class="img-user" style="height:350px" src="@s.Bio" alt="img">
-            <h3>@s.Name</h3>
-            <p>Age: @s.Age</p>
-            <p>Natitonality: @s.Nationality</p>
-            <p>Genre: @s.Genre </p>
-            <button class="btn-seemore" style="background-color:#e88f2a">
-            </button>
-            <div class="other" >
-                <a asp-action="Create">
-                    <span >
-                        <i class="fas fa-plus"></i>
-                    </span>
-                </a>
-                <a asp-action="Edit" asp-route-id="@s.Id">
-                    <span>
-                        <i class="fas fa-edit" ></i>
-                    </span>
-                </a>
-                <a asp-action="Delete" asp-route-id="@s.Id">
-                    <span>
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                </a>
-            </div>
-        </div>
-    }
+<div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
+	<h2 class="text-primary font-secondary">Translator</h2>
+	<h1 class="display-4 text-uppercase">Our Translators</h1>
 </div>
-<div class="product__pagination">
-    @Html.PagedListPager(Model,page=>Url.Action("Index",new{page=page}))
+<div class="row justify-content-center align-items-center">
+	@foreach (var item in Model)
+	{
+		<div class="col-lg-3 col-md-6">
+			<div class="team-item">
+				<div class="position-relative overflow-hidden">
+					<img class="img-fluid w-100" src="@item.Bio" style="height: 350px" alt="">
+					<div class="team-overlay w-100 h-100 position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center">
+						<div class="d-flex align-items-center justify-content-start">
+							@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+							{
+								<a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+								<a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+								<a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" asp-action="Create">
+									<i class="bi bi-plus-square-fill"></i>
+								</a>
+
+							}
+
+
+	
+						</div>
+					</div>
+				</div>
+				<div class="bg-dark border-inner text-center p-4" style="height: 200px; padding:10px ">
+					<h4 class="text-uppercase text-primary">@item.Name</h4>
+					<p class="text-white m-0">Age: @item.Age</p>
+                    <p class="text-white m-0">Nationality: @item.Nationality</p>
+					<p class="text-white m-0">Genre: @item.Genre</p>
+				</div>
+				
+			</div>
+		</div>
+	}
+</div>
+
+<div class="pagination justify-content-center mb-3">
+	@Html.PagedListPager(Model, page => Url.Action("Index", "Translator", new { page = page}),new X.PagedList.Web.Common.PagedListRenderOptions(){
+	LiElementClasses = new string[]{"page-item"},
+	PageClasses = new string[] {"page-link"}
+	})
 </div>

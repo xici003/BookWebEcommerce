@@ -5,7 +5,7 @@ namespace BookWebEcommerce.Models
     public class Publisher
     {
         [Key]
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Logo")]
         public string Logo { get; set; }
@@ -17,6 +17,6 @@ namespace BookWebEcommerce.Models
         public string Description {get; set;}
 
         //Relationship
-        public ICollection<Book> Books { get; set; }
+        public ICollection<Book>? Books { get; set; }
     }
 }

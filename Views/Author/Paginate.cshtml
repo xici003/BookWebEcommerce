@@ -21,9 +21,13 @@
                                     <img class="img-fluid w-100" src="@item.ProfilePictureURL" alt="" style="height: 400px">
                                     <div class="team-overlay w-100 h-100 position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center">
                                         <div class="d-flex align-items-center justify-content-start">
-                                            <a class="btn btn-lg btn-primary btn-lg  rounded-0 mx-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                                             <a class="btn btn-lg btn-primary btn-lg  rounded-0 mx-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                                            <a class="btn btn-lg btn-primary btn-lg  rounded-0 mx-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                                {
+                                                    <a class="btn btn-lg btn-primary btn-lg  rounded-0 mx-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                                    <a class="btn btn-lg btn-primary btn-lg  rounded-0 mx-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                                }
+                                                
                                         </div>
                                     </div>
                                 </div>

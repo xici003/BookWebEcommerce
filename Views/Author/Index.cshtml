@@ -12,9 +12,13 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New Author</a>
-</p>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New Authors</a>
+    </p>
+}
+
 
 
 <div id="dataList">

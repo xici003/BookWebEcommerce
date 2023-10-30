@@ -21,37 +21,35 @@
 			<div class="row justify-content-center align-items-center">
 				@foreach (var item in Model)
 				{
-					<div class="col-md-2 col-xs-6 border-primary mb-3">
-						<div class="card mb-3 mx-auto" style="max-width:340px">
-							<div class="row g-0">
-								<div class="col-md-12">
-									<div class="card-header text-white " style="background: #E88F2A">
-										<p class="card-text">
-											<h5 class="card-title">
-												@item.Name
-												 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+					<div class="col-lg-3 col-md-6">
+						<div class="team-item">
+							<div class="position-relative overflow-hidden">
+								<img class="img-fluid w-100" src="@item.ImageURL" style="height: 350px" alt="">
+								<div class="team-overlay w-100 h-100 position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center">
+									<div class="d-flex align-items-center justify-content-start">
+										@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 										{
-													<a class="text-white float-end" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-													<a class="text-white float-end" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
-										} 
-												
-											</h5>
-										</p>
+											<a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+											<a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+										}
+										
+										<a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i></a>
 									</div>
 								</div>
-
-								<div class="col-md-12">
-									<img src="@item.ImageURL" width="100%" alt="@item.Name">
-								</div>
-								<p class="card-text" , style="text-align: center ; font-weight:bold;font-size: 25px">@item.Author.FullName</p>
-								<div class="col-md-12">
-									<div class="card-footer">
-										<p class="card-text">
-											<a class="btn btn-outline-primary float-end" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i></a>
-											<a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id="@item.Id"><i class="bi bi-card-plus"></i>Add to cart @item.Price.ToString("c")</a>
-										</p>
-									</div>
-								</div>
+							</div>
+							<div class="bg-dark border-inner text-center p-4" style="height: 200px;">
+								<h4 class="text-uppercase text-primary">@item.Name</h4>
+								<p class="text-white m-0">@item.Description</p>
+								
+							</div>
+							<div class="card-footer">
+								<p class="card-text" style="padding-left: 80px">
+									@if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+									{
+										<a class="btn btn-success text-white" asp-controller="Order" asp-action="AddToShoppingCart" asp-route-id="@item.Id"><i class="bi bi-card-plus"></i>Add to cart @item.Price.ToString("c")</a>
+									}
+									
+								</p>
 							</div>
 						</div>
 					</div>

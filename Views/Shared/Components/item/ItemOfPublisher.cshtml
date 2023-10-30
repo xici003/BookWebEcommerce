@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Book>
+<ul class="row no-gutters bordered-cols">
+	@foreach(var i in Model)
+	{
+		<li class="col-6 col-lg-3 col-md-4" style="border: 1px solid">
+			<a href="#" class="item">
+				<div class="card-body" style="text-align:center; padding:5px">
+					<h6 class="title" style="min-height:20px; font-size:15px; font-family:'Times New Roman'">@i.Name</h6>
+					<img class="img-sm float-right" src=@i.ImageURL>
+					<p class="text-muted" style="padding-top:10px; font-family:'Times New Roman'">Price: @i.Price$</p>
+				</div>
+			</a>
+		</li>
+	}
+</ul> 
+

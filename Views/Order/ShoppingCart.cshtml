@@ -13,6 +13,7 @@
             <table class="table table-borderless table-hover text-center mb-0">
                 <thead style="background: #656565;color: white">
                     <tr>
+                        <th>Amount</th>
                         <th>Products</th>
                         <th>Price</th>
                         <th>Quantity</th>
@@ -23,6 +24,7 @@
                     @foreach (var item in Model.shoppingCart.ShoppingCartItems)
                     {
                         <tr>
+                            <td class="align-middle">@item.Amount</td>
                             <td class="align-middle"><img src="@item.Book.ImageURL" alt="" style="width: 50px;"> @item.Book.Name</td>
                             <td class="align-middle">@item.Book.Price.ToString("c")</td>
                             <td class="align-middle">

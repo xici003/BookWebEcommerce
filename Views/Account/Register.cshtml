@@ -46,14 +46,14 @@
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <label asp-for="ConfirmPassword" class="control-label text"></label>
                         <input asp-for="ConfirmPassword" class="form-control" style="border-radius: 3px" />
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
 
                     <div class="form-group" style="padding: 20px 0 20px;">
                         <input class="btn btn-outline-success float-right" style="margin-right: 5px"  type="submit" value="Sign up" />
-                        <a class="btn btn-outline-secondary" asp-controller="Movies" asp-action="Index">Cancel</a>
+                        <a class="btn btn-outline-secondary" asp-controller="Book" asp-action="Index">Cancel</a>
                     </div>
                 </form>
             </div>

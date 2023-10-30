@@ -2,12 +2,35 @@
 @model IEnumerable<BookWebEcommerce.Data.Enum.BookCategory>
 <ul class="nav">
     <li class="nav-item" id="null">
-        <a class="nav-link book category-filter">All</a>
+        <a class="nav-link book category-filter"><b>All</b></a>
     </li>
     @foreach (BookWebEcommerce.Data.Enum.BookCategory m in Enum.GetValues(typeof(BookWebEcommerce.Data.Enum.BookCategory)))
     {
         <li class="nav-item " id="@((int)m)">
-            <a class="nav-link book category-filter">@m</a>
+            <a class="nav-link book category-filter" ><b>@m</b></a>
         </li>
     }
 </ul>
+<style>
+    .nav-item {
+        list-style: none;
+    }
+
+    .nav-link.book.category-filter {
+        display: inline-block;
+        padding: 8px 12px;
+        background-color: #6C5F5B;
+        border-radius: 3.5px;
+        margin: 15px;
+        color: white;
+        text-decoration: none;
+    }
+
+    .nav-link.book.category-filter:hover {
+        background-color: #6c5f5b8c;
+        }
+
+    .nav-link.book.category-filter:focus{
+            color: black;
+        }
+</style>

@@ -23,7 +23,9 @@
             @* sua *@
             <div class="form-group row">
                 <label asp-for="Description" class="col-sm-2 col-form-label"></label>
-                <textarea name="Description" id="Description"></textarea>
+                <div class="col-md-5">
+                    <textarea id="Description" asp-for="Description" class="form-control"></textarea>
+                </div>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
@@ -102,11 +104,20 @@
         }
     }
 </script>
-<script>
-    $('#Description').summernote({
-        placeholder: 'Description',
-        tabsize: 1,
-        height: 100
-    });
-</script>
+@section Scripts {
+    <script src=" https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js"></script>"
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'), {
+                toolbar: ['heading', '|', 'bold', 'italic', 'link']
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+    </script>
+
+ }
 

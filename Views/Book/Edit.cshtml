@@ -20,10 +20,10 @@
             </div>
             <div style="margin-top: 10px" class="form-group row">
                 <label asp-for="Description" class="col-sm-2 col-form-label"></label>
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control content-editor" })
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                <div class="col-md-5">
+                    <textarea id="Description" asp-for="Description" class="form-control"></textarea>
                 </div>
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div style="margin-top:7px" class="form-group row">
                 <label asp-for="Price" class="col-sm-2 col-form-label"></label>
@@ -87,34 +87,20 @@
 </div>
 
 @section Scripts {
-    <!--
-include summernote css/js -->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".content-editor").summernote({
-                height: 300,
-                minHeight: null,
-                maxHeight: null,
-                codemirror: {
-                    theme: "monokai"
-                },
-                fontSizes: ['12', '14', '16', '18', '24', '36', '48'],
-                toolbar: [
-                      ['style', ['style']],
-                      ['font', ['bold', 'underline', 'clear']],
-                      ['fontname', ['fontname']],
-                      ['fontsize', ['fontsize']],
-                      ['color', ['color']],
-                      ['para', ['ul', 'ol', 'paragraph']],
-                      ['table', ['table']],
-                      ['insert', ['link', 'picture', 'video']],
-                      ['view', ['fullscreen', 'codeview', 'help']],
-                ],
-            });
-        });
-        </script>
+    <script src=" https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js"></script>"
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'), {
+                toolbar: ['heading','|','bold','italic','link']
+            })
+             .then(editor => {
+                    window.editor = editor;
+                })
+             .catch(err => {
+                    console.error(err.stack);
+                });
+    </script>
+
  }
 <script>
     function showImage() {
